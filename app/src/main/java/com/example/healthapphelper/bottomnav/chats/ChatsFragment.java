@@ -1,6 +1,8 @@
 package com.example.healthapphelper.bottomnav.chats;
 
 
+import static android.icu.text.DisplayContext.LENGTH_SHORT;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 import javax.annotation.Nonnull;
@@ -42,10 +45,49 @@ public class ChatsFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void loadChats(){
-      ArrayList<Chat> chats=new ArrayList<>();
-      chats.add(new Chat("2121","dfkdf","smsdls","sdsdks"));
-        binding.chatsRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.chatsRv.setAdapter(new ChatsAdapter(chats));
+    private void loadChats() {
+        ArrayList<Chat> chats = new ArrayList<>();
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String uid = currentUser.getUid();
+            FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    DataSnapshot userSnapshot = snapshot.child("Users").child(uid);
+                    if (userSnapshot.exists()) {
+                        DataSnapshot chatsSnapshot = userSnapshot.child("chats");
+                        if (chatsSnapshot.exists()) {
+                            String chatsStr = chatsSnapshot.getValue(String.class);
+                            if (chatsStr != null && !chatsStr.isEmpty()) {
+                                String[] chatsIds = chatsStr.split(",");
+                                for (String chatId : chatsIds) {
+                                    DataSnapshot chatSnapshot = snapshot.child("Chats").child(chatId);
+                                    if (chatSnapshot.exists()) {
+                                        String userId1 = Objects.requireNonNull(chatSnapshot.child("user1").getValue(String.class));
+                                        String userId2 = Objects.requireNonNull(chatSnapshot.child("user2").getValue(String.class));
+                                        String chatUserId = (uid.equals(userId1)) ? userId2 : userId1;
+                                        DataSnapshot chatUserSnapshot = snapshot.child("Users").child(chatUserId);
+                                        if (chatUserSnapshot.exists()) {
+                                            String chatName = Objects.requireNonNull(chatUserSnapshot.child("username").getValue(String.class));
+                                            Chat chat = new Chat(chatId, chatName, userId1, userId2);
+                                            chats.add(chat);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    binding.chatsRv.setLayoutManager(new LinearLayoutManager(getContext()));
+                    binding.chatsRv.setAdapter(new ChatsAdapter(chats));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(getContext(), "Failed to get user chats", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
+
 }

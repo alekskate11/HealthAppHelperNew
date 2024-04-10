@@ -42,7 +42,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder>{
         }
 
         holder.itemView.setOnClickListener(view -> {
-            ChatUtil.createChat(user);
+            ChatUtil.createChat(users.get(position));
         });
     }
 
@@ -50,4 +50,5 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder>{
     public int getItemCount() {
         return users.size();
     }
+
 }

@@ -56,6 +56,7 @@ loadUsers();
                 binding.usersRv.setLayoutManager(new LinearLayoutManager(getContext()));
                 binding.usersRv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
                 binding.usersRv.setAdapter(new UsersAdapter(users));
+
             }
 
             @Override
