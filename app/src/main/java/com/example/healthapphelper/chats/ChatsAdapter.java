@@ -1,5 +1,6 @@
 package com.example.healthapphelper.chats;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.healthapphelper.ChatActivity;
 import com.example.healthapphelper.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,13 +35,13 @@ public class ChatsAdapter extends RecyclerView.Adapter<CahtViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CahtViewHolder holder, int position) {
 holder.chat_name_tv.setText(chats.get(position).getChat_name());
-String userId;
-if(!chats.get(position).getUserId1().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
-    userId=chats.get(position).getUserId1();
-}else {
-    userId=chats.get(position).getUserId2();
 
-}
+        String userId;
+        if (!chats.get(position).getUserId1().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+            userId = chats.get(position).getUserId1();
+        }else{
+            userId = chats.get(position).getUserId2();
+        }
         FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("profileImage").get()
                 .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
@@ -56,6 +58,11 @@ if(!chats.get(position).getUserId1().equals(FirebaseAuth.getInstance().getCurren
                         }
                     }
                 });
+holder.itemView.setOnClickListener(v ->{
+    Intent intent = new Intent(holder.itemView.getContext(), ChatActivity.class);
+    intent.putExtra("chatId",chats.get(position).getChat());
+    holder.itemView.getContext().startActivity(intent);
+});
     }
 
     @Override
