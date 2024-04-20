@@ -38,7 +38,10 @@ public class ChatUtil {
                 .child("chats").get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()){
-                        String chats = task.getResult().getValue().toString();
+                        String chats = null;
+                        if (task.getResult().getValue() != null) {
+                            chats = task.getResult().getValue().toString();
+                        }
                         String chatsUpd = addIdToStr(chats, chatId);
 
                         FirebaseDatabase.getInstance().getReference().child("Users").child(uid)

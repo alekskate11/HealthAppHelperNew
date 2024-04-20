@@ -17,6 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <LinearLayout
         android:id="@+id/email_lin"
         android:layout_width="wrap_content"
@@ -32,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            app:tint="@android:color/white"
             android:src="@drawable/mail_icon" />
 
         <EditText
@@ -59,7 +61,7 @@
             android:src="@drawable/username_icon"
             android:layout_gravity="center_vertical"
             app:layout_constraintStart_toStartOf="parent"
-
+            app:tint="@android:color/white"
             app:layout_constraintTop_toBottomOf="@+id/login_title"
             />
 
@@ -88,6 +90,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/pass_icon"
             android:id="@+id/password_icon"
+            app:tint="@android:color/white"
             android:layout_gravity="center_vertical"/>
 
         <EditText
@@ -116,10 +119,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/forget_password_tv"
+        android:id="@+id/already_have_acc_tv"
         android:layout_marginTop="13dp"
         android:layout_marginStart="99dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:text="Already have an account?"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -129,8 +132,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
-        android:text="SIGN UP"
+        android:text="SIGN IN"
         android:textColor="@color/main"
-        app:layout_constraintStart_toEndOf="@+id/forget_password_tv"
-        app:layout_constraintTop_toTopOf="@+id/forget_password_tv" />
+        app:layout_constraintStart_toEndOf="@+id/already_have_acc_tv"
+        app:layout_constraintTop_toTopOf="@+id/already_have_acc_tv" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/forget_password_tv_registerActivity"
+        android:layout_marginTop="13dp"
+        android:textColor="@color/white"
+        android:text="Forget password?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/already_have_acc_tv"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#7FC0D8"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".bottomnav.profile.ProfileFragment"
@@ -16,18 +17,7 @@
     app:layout_constraintTop_toTopOf="parent"
     android:layout_marginTop="50dp"
     android:src="@drawable/baseline_person_24"/>
-    <ImageButton
-        android:id="@+id/logout_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:src="@drawable/baseline_exit_to_app_24"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="10dp"
-app:layout_constraintStart_toEndOf="@+id/profile_image_view"
-        app:layout_constraintTop_toTopOf="@id/profile_image_view"
-        android:backgroundTint="@android:color/transparent"
-        />
+
     <TextView
         android:id="@+id/username_tv"
         android:layout_width="wrap_content"
@@ -36,10 +26,70 @@ app:layout_constraintStart_toEndOf="@+id/profile_image_view"
     android:fontFamily="sans-serif"
         android:textSize="25sp"
 
- android:layout_marginTop="50dp"
+ android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_image_view"
+        />
+    <TextView
+        android:id="@+id/stutus_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="User role"
+        android:fontFamily="sans-serif"
+        android:textSize="25sp"
+
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username_tv"
+        />
+    <Button
+        android:id="@+id/edit_profile_btn"
+        android:layout_width="225dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="13dp"
+        android:backgroundTint="#153A4C"
+        android:fontFamily="sans-serif"
+        android:drawableLeft="@drawable/baseline_edit_24"
+        android:text="Edit profile"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stutus_tv"
+
+        />
+
+
+    <Button
+        android:id="@+id/change_theme_btn"
+        android:layout_width="225dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="13dp"
+        android:backgroundTint="#153A4C"
+        android:fontFamily="sans-serif"
+        android:drawableLeft="@drawable/baseline_dark_mode_24"
+        android:text="Dark mode"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_profile_btn"
+
+        />
+    <Button
+        android:id="@+id/exit_profile_btn"
+        android:layout_width="225dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="13dp"
+        android:backgroundTint="#153A4C"
+        android:fontFamily="sans-serif"
+        android:drawableLeft="@drawable/baseline_exit_to_app_24"
+        android:text="Log out"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_theme_btn"
+
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -27,4 +28,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profile_iv"
         tools:text="Username"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:civ_border_color="#05df29"
+        android:id="@+id/statusOnline"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/profile_iv"
+        app:layout_constraintEnd_toEndOf="@id/profile_iv"
+        app:civ_border_width="10dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="10dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:civ_border_color="#bfbfbf"
+        android:id="@+id/statusOffline"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/profile_iv"
+        app:layout_constraintEnd_toEndOf="@id/profile_iv"
+        app:civ_border_width="10dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="10dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

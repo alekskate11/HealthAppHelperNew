@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/mail_icon"
             android:layout_gravity="center_vertical"
+            app:tint="@android:color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_title" />
 
@@ -62,6 +63,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/pass_icon"
             android:id="@+id/password_icon"
+            app:tint="@android:color/white"
             android:layout_gravity="center_vertical"/>
 
         <EditText
@@ -91,7 +93,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/forget_password_tv"
         android:layout_marginTop="13dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:text="Forget password?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".ChatActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/message_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:background="@color/main"
+        app:layout_constraintBottom_toTopOf="@+id/message_et"/>
 
     <EditText
         android:id="@+id/message_et"
@@ -22,10 +24,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:hint="Type your message..."
+        android:background="@drawable/rounded_edittext_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/message_btn"
-        android:background="@drawable/message_et_shape"
+
         android:padding="13dp"
         />
 
@@ -36,9 +39,91 @@
         android:src="@drawable/baseline_send_24"
         app:backgroundTint="@android:color/transparent"
         android:layout_marginEnd="10dp"
+        android:padding="20dp"
         app:layout_constraintTop_toTopOf="@+id/message_et"
         app:layout_constraintBottom_toBottomOf="@+id/message_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="Send Message"/>
+
+    <ImageButton
+        android:id="@+id/back_from_chat_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:layout_marginTop="8dp"
+        app:backgroundTint="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="@+id/profile_iv"
+        app:layout_constraintEnd_toStartOf="@+id/profile_iv"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="Exit"/>
+
+
+    <TextView
+        android:id="@+id/usernameChatTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:tint="@android:color/white"
+        android:text="Username"
+        android:fontFamily="sans-serif"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toTopOf="@+id/profile_iv"
+
+        app:layout_constraintStart_toEndOf="@+id/profile_iv"
+/>
+    <TextView
+        android:id="@+id/user_role_status_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toTopOf="@+id/usernameChatTv"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_iv"
+        app:layout_constraintStart_toEndOf="@+id/profile_iv"
+        android:text="Status"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+
+        android:layout_marginStart="50dp"
+        android:src="@drawable/baseline_person_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:civ_border_color="#05df29"
+        android:id="@+id/statusOnline"
+        android:layout_marginStart="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/profile_iv"
+        app:layout_constraintEnd_toEndOf="@id/profile_iv"
+    app:civ_border_width="10dp"
+    android:src="@mipmap/ic_launcher"
+    />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/statusOffline"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@mipmap/ic_launcher"
+        app:civ_border_color="#bfbfbf"
+        app:civ_border_width="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/profile_iv"
+        app:layout_constraintEnd_toEndOf="@id/profile_iv" />
+
+    <Button
+        android:id="@+id/btnDeleteChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:onClick="onDeleteClick"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+      app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

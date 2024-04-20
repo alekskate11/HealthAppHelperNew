@@ -3,6 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main">#BE9AFF</color>
+    <color name="purple">#A57CEF</color>
+    <color name="blue">#5DB5B8</color>
+    <color name="dark_blue">#479497</color>
     <color name="light_blue">#8EDFFF</color>
-    <color name="gray">#f3f3f3</color>
+    <color name="gray">#9E9E9E</color>
 </resources>

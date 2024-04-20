@@ -13,11 +13,16 @@
     android:id="@+id/new_chat"
     android:title="New Chat"
     android:icon="@drawable/baseline_manage_search_24"/>
-
+    <item
+        android:id="@+id/chats_extended"
+        android:title="Extended chats"
+        android:icon="@drawable/baseline_chat_24"/>
     <item
         android:id="@+id/profile"
         android:title="Profile"
         android:icon="@drawable/baseline_person_24"/>
+
+
 
 
 

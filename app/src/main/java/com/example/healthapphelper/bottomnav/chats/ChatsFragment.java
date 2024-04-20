@@ -3,6 +3,8 @@ package com.example.healthapphelper.bottomnav.chats;
 
 import static android.icu.text.DisplayContext.LENGTH_SHORT;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.healthapphelper.ChatActivity;
 import com.example.healthapphelper.chats.Chat;
 import com.example.healthapphelper.chats.ChatsAdapter;
 import com.example.healthapphelper.databinding.FragmentChatsBinding;
@@ -36,7 +39,7 @@ import javax.annotation.Nullable;
 
 public class ChatsFragment extends Fragment {
     private FragmentChatsBinding binding;
-
+    private static final int DELETE_CHAT_REQUEST = 1;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +48,18 @@ public class ChatsFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == DELETE_CHAT_REQUEST && resultCode == Activity.RESULT_OK) {
+            String deletedChatId = data.getStringExtra("deletedChatId");
+            if (deletedChatId != null) {
+
+                loadChats();
+            }
+        }
+    }
     private void loadChats() {
         ArrayList<Chat> chats = new ArrayList<>();
 
@@ -78,8 +93,20 @@ public class ChatsFragment extends Fragment {
                             }
                         }
                     }
+                    ChatsAdapter adapter = new ChatsAdapter(chats, new ChatsAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position, View view) {
+                            Chat selectedChat = chats.get(position);
+                            Intent intent = new Intent(getActivity(), ChatActivity.class);
+                            intent.putExtra("chatId", selectedChat.getChat());
+                            intent.putExtra("username", selectedChat.getChat_name());
+                            startActivity(intent);
+                            startChatActivityForDeleting(selectedChat.getChat());
+                        }
+                    });
+
                     binding.chatsRv.setLayoutManager(new LinearLayoutManager(getContext()));
-                    binding.chatsRv.setAdapter(new ChatsAdapter(chats));
+                    binding.chatsRv.setAdapter(adapter);
                 }
 
                 @Override
@@ -89,5 +116,14 @@ public class ChatsFragment extends Fragment {
             });
         }
     }
+
+
+    private void startChatActivityForDeleting(String chatId) {
+        Intent intent = new Intent(getActivity(), ChatActivity.class);
+        intent.putExtra("chatId", chatId);
+        startActivityForResult(intent, DELETE_CHAT_REQUEST);
+    }
+
+
 
 }
