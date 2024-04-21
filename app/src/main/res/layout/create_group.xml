@@ -5,7 +5,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.healthapphelper.bottomnav.chats_extended.GroupCreateActivity">
+    <ImageButton
+        android:id="@+id/back_from_create_chat_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_24"
 
+        app:backgroundTint="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="Exit"/>
 
     <ImageView
         android:id="@+id/imageViewGroup"

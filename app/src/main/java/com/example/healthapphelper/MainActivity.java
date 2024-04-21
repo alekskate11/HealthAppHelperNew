@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // Initialize default fragment
+            // Initialize default fragment
         loadFragment(new ChatsFragment());
 
         binding.bottomNav.setSelectedItemId(R.id.chats); // This should be your default selected item, e.g., home_page

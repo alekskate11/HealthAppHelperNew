@@ -27,7 +27,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<CahtViewHolder> {
 
     public ChatsAdapter(ArrayList<Chat> chats, OnItemClickListener onItemClickListener) {
         this.chats = chats;
-        this.mListener = onItemClickListener; // Присвоение слушателя
+        this.mListener = onItemClickListener;
     }
 
 

@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.Manifest;
@@ -26,6 +27,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.healthapphelper.R;
 import com.example.healthapphelper.databinding.ActivityChatBinding;
+import com.example.healthapphelper.databinding.CreateGroupBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,6 +42,7 @@ import java.util.HashMap;
 
 public class GroupCreateActivity extends AppCompatActivity {
 
+    private CreateGroupBinding binding;
     private static final int CAMERA_REQUEST_CODE = 100;
     private static final int STORAGE_REQUEST_CODE = 200;
     private static final int IMAGE_PICK_CAMERA_CODE = 300;
@@ -56,12 +59,22 @@ public class GroupCreateActivity extends AppCompatActivity {
     private EditText groupDescriptionEt;
     private EditText groupTitleEt;
     private Button createGroupBtn;
+    private ImageButton back_from_create_chat_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_group); // Предполагается, что у вас есть layout с именем "activity_group_create"
+        setContentView(R.layout.create_group);
+        binding = CreateGroupBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
+
+        binding.backFromCreateChatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -268,4 +281,6 @@ public class GroupCreateActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
 }
