@@ -69,8 +69,7 @@ private FirebaseAuth firebaseAuth;
                         for (DataSnapshot chatSnapshot : snapshot.getChildren()) {
                             String groupId = chatSnapshot.getKey();
 
-
-                            if (groupId.equals(currentUserId)) {
+                            if (groupId.contains(currentUserId)) {  // changed the condition here
                                 continue;
                             }
 
@@ -80,12 +79,10 @@ private FirebaseAuth firebaseAuth;
                             String timestamp = chatSnapshot.child("timestamp").getValue(String.class);
                             String createdBy = chatSnapshot.child("createdBy").getValue(String.class);
 
-                            // Создаем новый объект ModelGroupChatList и добавляем в список
                             ModelGroupChatList chat = new ModelGroupChatList(groupId, groupTitle, groupDescription, groupIcon, timestamp, createdBy);
                             groupChatLists.add(chat);
                         }
 
-                        // Создаем и устанавливаем адаптер
                         AdapterGroupChat adapter = new AdapterGroupChat(getContext(), groupChatLists);
                         groupsRv.setAdapter(adapter);
                     }

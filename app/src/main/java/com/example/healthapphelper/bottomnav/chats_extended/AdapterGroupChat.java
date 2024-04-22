@@ -1,5 +1,7 @@
 package com.example.healthapphelper.bottomnav.chats_extended;
 
+
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -18,7 +20,7 @@ import com.example.healthapphelper.users.UserViewHolder;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.HolderViewChatList>{
+public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.HolderViewChatList> {
     private Context context;
     private ArrayList<ModelGroupChatList> groupChatLists;
 
@@ -27,13 +29,13 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.Hold
         this.groupChatLists = groupChatLists;
     }
 
-
     @NonNull
     @Override
     public HolderViewChatList onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.group_chatlist_row, parent, false);
         return new HolderViewChatList(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull HolderViewChatList holder, int position) {
         ModelGroupChatList model = groupChatLists.get(position);
@@ -52,8 +54,8 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.Hold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context,GroupCreateActivity.class);
-                intent.putExtra("groupId",groupId);
+                Intent intent = new Intent(context, GroupChatActivity.class);
+                intent.putExtra("groupId", groupId);
                 context.startActivity(intent);
             }
         });

@@ -1,7 +1,7 @@
 package com.example.healthapphelper.bottomnav.chats_extended;
 
 public class ModelGroupChatList {
-    String groupId,groupTitle,groupDescription,groupIcon,timestamp,createdBy;
+    String groupId,groupTitle,groupDescription,groupIcon,timestamp,createdBy,sender;
 
     public ModelGroupChatList() {
     }
@@ -13,6 +13,14 @@ public class ModelGroupChatList {
         this.groupIcon = groupIcon;
         this.timestamp = timestamp;
         this.createdBy = createdBy;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     public String getGroupId() {

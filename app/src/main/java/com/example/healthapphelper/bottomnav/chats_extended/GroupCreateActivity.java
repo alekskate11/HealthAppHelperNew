@@ -69,7 +69,7 @@ public class GroupCreateActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-        binding.backFromCreateChatBtn.setOnClickListener(new View.OnClickListener() {
+        binding.backFromChatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
