@@ -10,6 +10,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.healthapphelper.GroupParticipantsActivity;
 import com.example.healthapphelper.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,7 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GroupChatActivity extends AppCompatActivity {
-private String groupId;
+private String groupId,myGroupRole;
 
 private ImageView groupIconIv;
 private ImageButton attachBtn,sendBtn;
@@ -48,8 +51,7 @@ private AdapterChat adapterGroupChat;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_chat);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 attachBtn=findViewById(R.id.attachBtn);
 back_btn=findViewById(R.id.back_from_create_chat_btn);
         groupIconIv = findViewById(R.id.groupNew_iv);
@@ -63,11 +65,20 @@ back_btn=findViewById(R.id.back_from_create_chat_btn);
         firebaseAuth=FirebaseAuth.getInstance();
         loadGroupInfo();
         loadGroupMessages();
-
+loadMyGroupRole();
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        ImageButton addParticipantsBtn = findViewById(R.id.add_participants_togroup);
+        addParticipantsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GroupChatActivity.this, GroupParticipantsActivity.class);
+                intent.putExtra("groupId", groupId);
+                startActivity(intent);
             }
         });
 sendBtn.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +95,26 @@ sendBtn.setOnClickListener(new View.OnClickListener() {
         });
 
 
+    }
+
+    private void loadMyGroupRole() {
+        DatabaseReference ref=FirebaseDatabase.getInstance().getReference("Groups");
+        ref.child(groupId).child("Participants")
+        .orderByChild("uid").equalTo(firebaseAuth.getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot ds:snapshot.getChildren()){
+                            myGroupRole=""+ds.child("role").getValue();
+                            invalidateOptionsMenu();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     private void loadGroupMessages() {
@@ -106,6 +137,8 @@ sendBtn.setOnClickListener(new View.OnClickListener() {
             }
         });
      }
+
+
 
     private void sendMessage(String message) {
         String timestamp=""+System.currentTimeMillis();
@@ -156,5 +189,14 @@ messegeEt.setText("");
                 });
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id=item.getItemId();
+        if(id==R.id.add_participants_togroup){
+      Intent intent=new Intent(this, GroupParticipantsActivity.class);
+      intent.putExtra("groupId",groupId);
+      startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

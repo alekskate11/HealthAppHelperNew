@@ -20,6 +20,7 @@
         <activity
             android:name=".bottomnav.chats_extended.GroupChatActivity"
             android:exported="false" />
+
         <activity
             android:name=".bottomnav.chats_extended.GroupCreateActivity"
             android:exported="false" /> <!-- Splash Screen Activity -->
@@ -38,6 +39,7 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
+
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
